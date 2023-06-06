@@ -1,25 +1,17 @@
-import React from 'react';
-import { Route, Switch } from 'react-router-dom';
-import RootPage from './pages/Root.js'
-import SignupPage from './pages/Signup.js'
-import LoginPage from './pages/Login.js'
-import NotfoundPage from './pages/Notfound.js'
-import './App.css'
+import { html } from './util.js'
 
-const App = () => {
-    return (
-        <div>
-            <Switch>
-                <Route exact path="/" component={RootPage} />
 
-                <Route path="/auth/login" component={LoginPage} />
-                <Route path="/auth/signup" component={SignupPage} />
+class App extends HTMLElement {
+    constructor() {
+        super();
 
-                <Route path='*' component={NotfoundPage} />
-            </Switch>
+        let shadow = this.attachShadow({mode: 'open'});
+        shadow.appendChild(this.template())
+    }
 
-        </div>
-    );
-};
+    template() {
+        return html(`<h1>테스트 입니다.</h1>`)
+    }
+}
 
-export default App;
+export { App }

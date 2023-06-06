@@ -1,17 +1,23 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import * as ReactDOMClient from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
-import App from './App.js';
+import { html } from './util.js'
+import { App } from './App.js'
 
 
-const rootElement = document.getElementById("root");
-const root = ReactDOMClient.createRoot(rootElement);
-root.render(
-    <React.StrictMode>
-        <BrowserRouter>
-            <App callback={() => console.log("renderered")} />       
-        </BrowserRouter>
-    </React.StrictMode>
-);
+class Root extends HTMLElement {
+    constructor() {
+        super();
 
+        let shadow = this.attachShadow({mode: 'open'});
+        shadow.appendChild(this.template())
+    }
+
+    template() {
+        return html(`<div>
+            sdvsdv
+            <app-components></app-components>
+        </div>`)
+    }
+}
+
+customElements.define('app-components', App);
+
+customElements.define('app-root', Root);
